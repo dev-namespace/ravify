@@ -14,9 +14,15 @@ const LobbyPage = ({ navigation }) => {
     <View style={styles.container}>
       <Text> Lobby page </Text>
       <Button onPress={() => navigation.navigate("Auth")} title={"Auth page"} />
+      <Button
+        onPress={() => navigation.navigate("Player")}
+        title={"Player page"}
+      />
       <Button onPress={() => spotify.getPlaybackState()} title={"getState"} />
       <Button onPress={() => spotify.pause()} title={"pause"} />
       <Button onPress={() => spotify.play()} title={"play"} />
+      <Button onPress={() => spotify.getDevices()} title={"devices"} />
+      <Button onPress={() => spotify.setDevice()} title={"setdev"} />
       <Text> token: {auth.accessToken} </Text>
       <Text> device: {spotify.deviceId} </Text>
     </View>

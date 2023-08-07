@@ -25,14 +25,34 @@ export default class SpotifyStore {
     await this.query("me/player/pause", "PUT");
   }
 
-  async play() {
-    await this.query("me/player/play", "PUT");
+  async play(deviceId?: string, uri?: string) {
+    // deviceId = "f5065be3610e09c8467b9f895426e4e7735ef675";
+    uri = "spotify:track:6CRrgsbwjYscoqZ9ja118u";
+    // if (deviceId) {
+    const result = await this.query(`me/player/play`, "PUT", {
+      uris: [uri],
+    });
+    console.log(result);
+    // } else return await this.query("me/player/play", "PUT");
+  }
+
+  async setDevice() {
+    return await this.query("me/player", "PUT", {
+      play: true,
+      device_ids: ["f5065be3610e09c8467b9f895426e4e7735ef675"],
+    });
+  }
+
+  async getDevices() {
+    const devices = await this.query("me/player/devices");
+    console.log("devices:", devices);
   }
 
   async query(path: string, method = "GET", body: any = undefined) {
+    console.log("path:", path, body);
     const response = await fetch(`${API_URL}/${path}`, {
       method: method,
-      body: body,
+      body: JSON.stringify(body),
       headers: new Headers({
         Authorization: `Bearer ${this.rootStore.auth.accessToken}`,
         "Content-Type": "application/json",
@@ -43,7 +63,7 @@ export default class SpotifyStore {
       console.log("query response", json);
       return json;
     } catch (err) {
-      console.log("Error parsing response:", err);
+      console.log("Error parsing response:", err, JSON.stringify(response));
     }
   }
 }

@@ -4,6 +4,7 @@ import { AuthPage } from "app/pages/AuthPage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LobbyPage from "./pages/Lobby";
+import PlayerPage from "./pages/Player";
 import { StoreProvider } from "./store";
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ const App = () => {
         <Navigator>
           <Stack.Screen name="Lobby" component={LobbyPage} />
           <Stack.Screen name="Auth" component={AuthPage} />
+          <Stack.Screen name="Player" component={PlayerPage} />
         </Navigator>
       </NavigationContainer>
     </StoreProvider>

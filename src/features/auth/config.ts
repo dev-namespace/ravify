@@ -1,4 +1,5 @@
 export const scopes = [
+  "user-read-private",
   "user-read-email",
   "user-read-currently-playing",
   "user-read-playback-state",
